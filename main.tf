@@ -68,7 +68,6 @@ resource "proxmox_virtual_environment_vm" "talos_vms" {
     iothread     = true
     discard      = "on"
     ssd          = true
-    file_format  = "qcow2"
     size         = 20
     file_id      = proxmox_virtual_environment_download_file.talos_image.id
   }
@@ -97,8 +96,6 @@ resource "proxmox_virtual_environment_vm" "talos_vms" {
       }
     }
   }
-
-  serial_device {}
 
   # dynamic "hostpci" {
   #   for_each = each.value.igpu ? [1] : []
