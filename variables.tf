@@ -31,15 +31,16 @@ variable "talos_extra_kernel_args" {
 variable "talos_nodes" {
   description = "Configuration for cluster nodes"
   type = map(object({
-    host_node    = string
-    machine_type = string
-    datastore_id = optional(string, "local-lvm")
-    dns          = optional(list(string))
-    vm_id        = number
-    cpu          = number
-    memory       = number
-    ip_address   = string
-    ip_gateway   = string
-    ip_subnet    = number
+    host_node      = string
+    machine_type   = string
+    datastore_id   = optional(string, "local-lvm")
+    dns            = optional(list(string))
+    vm_id          = number
+    cpu            = number
+    memory         = number
+    boot_disk_size = optional(number, 20)
+    ip_address     = string
+    ip_gateway     = string
+    ip_subnet      = number
   }))
 }

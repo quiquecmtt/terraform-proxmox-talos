@@ -69,7 +69,7 @@ resource "proxmox_virtual_environment_vm" "talos_vms" {
     iothread     = true
     discard      = "on"
     ssd          = true
-    size         = 20
+    size         = each.value.boot_disk_size
     file_id      = proxmox_virtual_environment_download_file.talos_image.id
   }
 
