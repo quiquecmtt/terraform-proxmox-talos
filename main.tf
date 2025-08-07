@@ -34,8 +34,7 @@ resource "proxmox_virtual_environment_download_file" "talos_image" {
 resource "proxmox_virtual_environment_vm" "talos_vms" {
   for_each = var.talos_nodes
 
-  node_name       = each.value.host_node
-  stop_on_destroy = true
+  node_name = each.value.host_node
 
   name        = each.key
   description = "Managed by Terraform"
