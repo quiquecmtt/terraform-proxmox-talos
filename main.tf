@@ -11,7 +11,7 @@ resource "talos_image_factory_schematic" "this" {
       customization = {
         extraKernelArgs = var.talos_extra_kernel_args
         systemExtensions = {
-          officialExtensions = data.talos_image_factory_extensions_versions.this.extensions_info.*.name
+          officialExtensions = data.talos_image_factory_extensions_versions.this.extensions_info[*].name
         }
       }
     }
@@ -34,7 +34,8 @@ resource "proxmox_virtual_environment_download_file" "talos_image" {
 resource "proxmox_virtual_environment_vm" "talos_vms" {
   for_each = var.talos_nodes
 
-  node_name = each.value.host_node
+  node_name       = each.value.host_node
+  stop_on_destroy = true
 
   name        = each.key
   description = "Managed by Terraform"
@@ -68,7 +69,7 @@ resource "proxmox_virtual_environment_vm" "talos_vms" {
     iothread     = true
     discard      = "on"
     ssd          = true
-    size         = 20
+    size         = each.value.boot_disk_size
     file_id      = proxmox_virtual_environment_download_file.talos_image.id
   }
 
