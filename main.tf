@@ -11,7 +11,7 @@ resource "talos_image_factory_schematic" "this" {
       customization = {
         extraKernelArgs = var.talos_extra_kernel_args
         systemExtensions = {
-          officialExtensions = data.talos_image_factory_extensions_versions.this.extensions_info.*.name
+          officialExtensions = data.talos_image_factory_extensions_versions.this.extensions_info[*].name
         }
       }
     }
