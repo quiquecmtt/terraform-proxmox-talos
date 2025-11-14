@@ -4,7 +4,13 @@ on:
   schedule:
     # Runs at 12:05 PM UTC, every Wednesday
     - cron: "5 12 * * 3"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: "Run Renovate with DEBUG log level"
+        required: false
+        default: false
+        type: boolean
 
 # Required permissions for GITHUB_TOKEN to create branches/PRs
 permissions:
@@ -19,6 +25,8 @@ jobs:
 
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v39.0.5
+        env:
+          LOG_LEVEL: ${{ github.event.inputs.debug && 'debug' || 'info' }}
         with:
           configurationFile: ".github/renovate.json"
           token: ${{ secrets.GITHUB_TOKEN }}
