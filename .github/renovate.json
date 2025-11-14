@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    // Changed from "config:base" to the recommended modern standard.
+    "config:recommended",
     "group:allNonMajor",
     "helpers:pinGitHubActionDigests"
   ],
@@ -11,57 +12,44 @@
       "matchManagers": [
         "github-actions"
       ],
-      "matchPackagePatterns": [
-        "*"
-      ],
       "groupName": "GitHub Actions dependencies",
-      "group:combine": true,
       "automerge": true,
       "automergeType": "pr",
-      "excludePackagePatterns": [
-        "^actions/.+@v4"
+      // This combined pattern replaces matchPackagePatterns and excludePackagePatterns.
+      // It ensures all packages are matched, except for those specifically excluded from auto-merging (like v4 majors).
+      "matchPackageNames": [
+        "*",
+        "!/^actions/.+@v4/"
       ],
       "allowedVersions": "!/^v4\\./"
     },
     {
-      "description": "Terraform Providers major updates (manual review)",
+      "description": "Terraform Provider Updates",
       "matchManagers": [
         "terraform"
       ],
-      "matchPackagePatterns": [
-        "*"
+      // This single matchPackageNames targets all Terraform registry providers.
+      "matchPackageNames": [
+        "/^registry\\.terraform\\.io/.+/"
       ],
-      "groupName": "Terraform Provider major updates",
+      "groupName": "Terraform Provider Updates",
+      // Defines major updates (manual review/no automerge)
       "major": {
         "automerge": false,
         "labels": [
           "renovate/major"
         ]
       },
-      "packagePatterns": [
-        "^registry\\.terraform\\.io/.+"
-      ]
-    },
-    {
-      "description": "Terraform Providers minor/patch updates (automerge)",
-      "matchManagers": [
-        "terraform"
-      ],
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "groupName": "Terraform Provider minor/patch updates",
+      // Defines minor updates (automerge)
       "minor": {
         "automerge": true,
         "automergeType": "pr"
       },
+      // Defines patch updates (automerge)
       "patch": {
         "automerge": true,
         "automergeType": "pr"
-      },
-      "packagePatterns": [
-        "^registry\\.terraform\\.io/.+"
-      ]
+      }
     }
   ]
 }
