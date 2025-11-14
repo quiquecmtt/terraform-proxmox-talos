@@ -1,31 +1,67 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    "helpers:terraform"
+    "config:base",
+    "group:allNonMajor",
+    "helpers:pinGitHubActionDigests"
   ],
-  "terraform": {
-    "enabled": true
-  },
-  "github-actions": {
-    "enabled": true
-  },
   "packageRules": [
     {
+      "description": "Group and auto-merge non-major GitHub Actions updates",
       "matchManagers": [
         "github-actions"
       ],
-      "groupName": "GitHub Actions updates",
-      "groupSlug": "gha"
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "groupName": "GitHub Actions dependencies",
+      "group:combine": true,
+      "automerge": true,
+      "automergeType": "pr",
+      "excludePackagePatterns": [
+        "^actions/.+@v4"
+      ],
+      "allowedVersions": "!/^v4\\./"
     },
     {
+      "description": "Terraform Providers major updates (manual review)",
       "matchManagers": [
         "terraform"
       ],
-      "groupName": "Terraform updates",
-      "groupSlug": "tf"
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "groupName": "Terraform Provider major updates",
+      "major": {
+        "automerge": false,
+        "labels": [
+          "renovate/major"
+        ]
+      },
+      "packagePatterns": [
+        "^registry\\.terraform\\.io/.+"
+      ]
+    },
+    {
+      "description": "Terraform Providers minor/patch updates (automerge)",
+      "matchManagers": [
+        "terraform"
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "groupName": "Terraform Provider minor/patch updates",
+      "minor": {
+        "automerge": true,
+        "automergeType": "pr"
+      },
+      "patch": {
+        "automerge": true,
+        "automergeType": "pr"
+      },
+      "packagePatterns": [
+        "^registry\\.terraform\\.io/.+"
+      ]
     }
-  ],
-  "gitAuthor": "Renovate Bot <renovate@quiquecmtt.com>",
-  "dependencyDashboard": true
+  ]
 }
