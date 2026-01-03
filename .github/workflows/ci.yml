@@ -8,6 +8,10 @@ on:
 
 jobs:
   ci:
+    permissions:
+      contents: write
     uses: quiquecmtt/reusable-workflows/.github/workflows/terraform-ci.yml@main
     with:
+      enable_security_scan: true
+      enable_docs: true
       allowed_pr_author: "quiquecmtt"
