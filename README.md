@@ -8,14 +8,14 @@ Terraform module to create Talos VMs in Proxmox VE.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
 | <a name="requirement_proxmox"></a> [proxmox](#requirement\_proxmox) | 0.93.0 |
-| <a name="requirement_talos"></a> [talos](#requirement\_talos) | 0.10.0 |
+| <a name="requirement_talos"></a> [talos](#requirement\_talos) | 0.10.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_proxmox"></a> [proxmox](#provider\_proxmox) | 0.93.0 |
-| <a name="provider_talos"></a> [talos](#provider\_talos) | 0.10.0 |
+| <a name="provider_talos"></a> [talos](#provider\_talos) | 0.10.1 |
 
 ## Modules
 
@@ -27,8 +27,8 @@ No modules.
 |------|------|
 | [proxmox_virtual_environment_download_file.talos_image](https://registry.terraform.io/providers/bpg/proxmox/0.93.0/docs/resources/virtual_environment_download_file) | resource |
 | [proxmox_virtual_environment_vm.talos_vms](https://registry.terraform.io/providers/bpg/proxmox/0.93.0/docs/resources/virtual_environment_vm) | resource |
-| [talos_image_factory_schematic.this](https://registry.terraform.io/providers/siderolabs/talos/0.10.0/docs/resources/image_factory_schematic) | resource |
-| [talos_image_factory_extensions_versions.this](https://registry.terraform.io/providers/siderolabs/talos/0.10.0/docs/data-sources/image_factory_extensions_versions) | data source |
+| [talos_image_factory_schematic.this](https://registry.terraform.io/providers/siderolabs/talos/0.10.1/docs/resources/image_factory_schematic) | resource |
+| [talos_image_factory_extensions_versions.this](https://registry.terraform.io/providers/siderolabs/talos/0.10.1/docs/data-sources/image_factory_extensions_versions) | data source |
 
 ## Inputs
 
