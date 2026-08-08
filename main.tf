@@ -34,6 +34,23 @@ resource "proxmox_download_file" "talos_image" {
   url                     = "https://factory.talos.dev/image/${talos_image_factory_schematic.this.id}/${var.talos_version}/nocloud-amd64.raw.gz"
   decompression_algorithm = "gz"
 
+  # Must be false, and the reason is specific to decompression.
+  #
+  # With overwrite = true the provider compares the remote file's size against
+  # the datastore's on every plan. The image is downloaded compressed and
+  # stored decompressed, so those two numbers can never agree -- 208 MB from
+  # factory.talos.dev against 4.4 GB on disk. `size` forces replacement, and
+  # the resulting file_id change cascades into every VM's disk.
+  #
+  # The effect is that every plan after the first proposes destroying and
+  # recreating the entire cluster, for no reason at all.
+  #
+  # Nothing is lost by disabling the check. The file name already embeds the
+  # schematic ID, so a different Talos version or extension set produces a
+  # different file name and therefore a different resource. There is no case
+  # where the same name should hold different content for overwrite to catch.
+  overwrite = false
+
   # lifecycle {
   #   prevent_destroy = true
   # }
