@@ -67,6 +67,8 @@ resource "proxmox_virtual_environment_vm" "talos_vms" {
   tags        = var.tags
   on_boot     = true
   vm_id       = each.value.vm_id
+  bios        = var.vm_bios
+  machine     = var.vm_machine_type
 
   scsi_hardware = "virtio-scsi-single"
 
@@ -97,6 +99,15 @@ resource "proxmox_virtual_environment_vm" "talos_vms" {
     ssd          = true
     size         = each.value.boot_disk_size
     file_id      = proxmox_download_file.talos_image.id
+  }
+
+  dynamic "efi_disk" {
+    for_each = var.vm_bios == "ovmf" ? [each.value.datastore_id] : []
+    content {
+      datastore_id      = efi_disk.value
+      type              = "4m"
+      pre_enrolled_keys = false
+    }
   }
 
   boot_order = ["scsi0"]

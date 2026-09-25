@@ -37,6 +37,8 @@ No modules.
 | <a name="input_image_datastore_id"></a> [image\_datastore\_id](#input\_image\_datastore\_id) | Datastore holding the downloaded Talos image.<br/><br/>`local` is per-node storage, so the image is only visible on<br/>`image_node_name`. Spreading nodes across several Proxmox hosts means<br/>instantiating this module once per host. | `string` | `"local"` | no |
 | <a name="input_image_node_name"></a> [image\_node\_name](#input\_image\_node\_name) | Node where to download Talos image | `string` | n/a | yes |
 | <a name="input_network_bridge"></a> [network\_bridge](#input\_network\_bridge) | Default bridge for node NICs. Override per node with `bridge`. | `string` | `"vmbr0"` | no |
+| <a name="input_vm_bios"></a> [vm\_bios](#input\_vm\_bios) | Firmware for Talos VMs. Set to `ovmf` with `vm_machine_type = "q35"` for UEFI. | `string` | `"ovmf"` | no |
+| <a name="input_vm_machine_type"></a> [vm\_machine\_type](#input\_vm\_machine\_type) | Proxmox virtual machine chipset. Use `q35` with OVMF. | `string` | `"q35"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Proxmox tags applied to every node this module creates.<br/><br/>Proxmox normalises tags to lowercase and sorts them, so the order given<br/>here is not preserved. | `list(string)` | <pre>[<br/>  "terraform",<br/>  "talos"<br/>]</pre> | no |
 | <a name="input_talos_extensions"></a> [talos\_extensions](#input\_talos\_extensions) | Talos extensions needed in Talos nodes | `list(string)` | <pre>[<br/>  "siderolabs/iscsi-tools",<br/>  "siderolabs/qemu-guest-agent"<br/>]</pre> | no |
 | <a name="input_talos_extra_kernel_args"></a> [talos\_extra\_kernel\_args](#input\_talos\_extra\_kernel\_args) | Talos extra kernel arguments for Talos nodes | `list(string)` | `[]` | no |

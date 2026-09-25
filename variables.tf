@@ -24,6 +24,25 @@ variable "network_bridge" {
   default     = "vmbr0"
 }
 
+variable "vm_bios" {
+  description = "Firmware for Talos VMs. Set to `ovmf` with `vm_machine_type = \"q35\"` for UEFI."
+  type        = string
+  sensitive   = false
+  default     = "ovmf"
+
+  validation {
+    condition     = contains(["ovmf", "seabios"], var.vm_bios)
+    error_message = "vm_bios must be either ovmf or seabios."
+  }
+}
+
+variable "vm_machine_type" {
+  description = "Proxmox virtual machine chipset. Use `q35` with OVMF."
+  type        = string
+  sensitive   = false
+  default     = "q35"
+}
+
 variable "tags" {
   description = <<-EOT
     Proxmox tags applied to every node this module creates.
