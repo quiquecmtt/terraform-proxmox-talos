@@ -20,8 +20,8 @@ Talos OS versions, VM boot images or cluster secrets by themselves.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_proxmox"></a> [proxmox](#provider\_proxmox) | 0.117.0 |
-| <a name="provider_talos"></a> [talos](#provider\_talos) | 0.12.0 |
+| <a name="provider_proxmox"></a> [proxmox](#provider\_proxmox) | >= 0.113.1, < 0.118.0 |
+| <a name="provider_talos"></a> [talos](#provider\_talos) | >= 0.11.0, < 0.13.0 |
 
 ## Modules
 
@@ -31,10 +31,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [proxmox_download_file.talos_image](https://registry.terraform.io/providers/bpg/proxmox/0.117.0/docs/resources/download_file) | resource |
-| [proxmox_virtual_environment_vm.talos_vms](https://registry.terraform.io/providers/bpg/proxmox/0.117.0/docs/resources/virtual_environment_vm) | resource |
-| [talos_image_factory_schematic.this](https://registry.terraform.io/providers/siderolabs/talos/0.12.0/docs/resources/image_factory_schematic) | resource |
-| [talos_image_factory_extensions_versions.this](https://registry.terraform.io/providers/siderolabs/talos/0.12.0/docs/data-sources/image_factory_extensions_versions) | data source |
+| [proxmox_download_file.talos_image](https://registry.terraform.io/providers/bpg/proxmox/latest/docs/resources/download_file) | resource |
+| [proxmox_virtual_environment_vm.talos_vms](https://registry.terraform.io/providers/bpg/proxmox/latest/docs/resources/virtual_environment_vm) | resource |
+| [talos_image_factory_schematic.this](https://registry.terraform.io/providers/siderolabs/talos/latest/docs/resources/image_factory_schematic) | resource |
+| [talos_image_factory_extensions_versions.this](https://registry.terraform.io/providers/siderolabs/talos/latest/docs/data-sources/image_factory_extensions_versions) | data source |
 
 ## Inputs
 
