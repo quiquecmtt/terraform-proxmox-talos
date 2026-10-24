@@ -1,14 +1,20 @@
 # Terraform Proxmox Talos
 Terraform module to create Talos VMs in Proxmox VE.
 
+Consumers select and lock their own provider versions within the supported
+ranges. CI validates the original Proxmox 0.113.1/Talos 0.11.0 combination,
+homelab's Proxmox 0.116.0/Talos 0.11.0 combination, and Proxmox 0.117.0/Talos
+0.12.0 without accessing infrastructure or state. Module releases do not change
+Talos OS versions, VM boot images or cluster secrets by themselves.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
-| <a name="requirement_proxmox"></a> [proxmox](#requirement\_proxmox) | 0.117.0 |
-| <a name="requirement_talos"></a> [talos](#requirement\_talos) | 0.12.0 |
+| <a name="requirement_proxmox"></a> [proxmox](#requirement\_proxmox) | >= 0.113.1, < 0.118.0 |
+| <a name="requirement_talos"></a> [talos](#requirement\_talos) | >= 0.11.0, < 0.13.0 |
 
 ## Providers
 

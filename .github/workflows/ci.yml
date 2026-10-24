@@ -7,6 +7,49 @@ on:
   workflow_dispatch:
 
 jobs:
+  provider-compatibility:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        include:
+          - proxmox: "0.113.1"
+            talos: "0.11.0"
+          - proxmox: "0.116.0"
+            talos: "0.11.0"
+          - proxmox: "0.117.0"
+            talos: "0.12.0"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_wrapper: false
+      - name: Validate consumer provider constraints without state or credentials
+        working-directory: tests/provider-compatibility
+        env:
+          PROXMOX_VERSION: ${{ matrix.proxmox }}
+          TALOS_VERSION: ${{ matrix.talos }}
+        run: |
+          cat > versions.tf <<EOF
+          terraform {
+            required_providers {
+              proxmox = {
+                source = "bpg/proxmox"
+                version = "${PROXMOX_VERSION}"
+              }
+              talos = {
+                source = "siderolabs/talos"
+                version = "${TALOS_VERSION}"
+              }
+            }
+          }
+          EOF
+          tofu init -backend=false -input=false
+          tofu validate
+
   ci:
     permissions:
       contents: write
