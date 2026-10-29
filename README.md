@@ -13,14 +13,14 @@ Talos OS versions, VM boot images or cluster secrets by themselves.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
-| <a name="requirement_proxmox"></a> [proxmox](#requirement\_proxmox) | >= 0.113.1, < 0.118.0 |
+| <a name="requirement_proxmox"></a> [proxmox](#requirement\_proxmox) | < 0.119.0 |
 | <a name="requirement_talos"></a> [talos](#requirement\_talos) | >= 0.11.0, < 0.13.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_proxmox"></a> [proxmox](#provider\_proxmox) | >= 0.113.1, < 0.118.0 |
+| <a name="provider_proxmox"></a> [proxmox](#provider\_proxmox) | < 0.119.0 |
 | <a name="provider_talos"></a> [talos](#provider\_talos) | >= 0.11.0, < 0.13.0 |
 
 ## Modules
